@@ -1,0 +1,13 @@
+# Define node version
+FROM node:14.21-alpine
+# Define container directory
+WORKDIR /server
+# Copy package*.json for npm install
+COPY ./server/package*.json ./
+# Copy all files
+COPY ./server ./
+# install all package
+RUN npm i
+# Expose port 8080 for server
+EXPOSE 8080
+CMD ["node", "dist/index.js"]

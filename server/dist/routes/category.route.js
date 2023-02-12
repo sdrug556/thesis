@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const category_controller_1 = require("../controllers/category.controller");
+const jwt_middleware_1 = require("../middleware/jwt.middleware");
+const categoryRoute = (0, express_1.Router)();
+categoryRoute.get('/category', jwt_middleware_1.JwtMiddleware.verify, category_controller_1.CategoryController.getAll);
+categoryRoute.post('/category', jwt_middleware_1.JwtMiddleware.verify, category_controller_1.CategoryController.create);
+categoryRoute.put('/category/:id', jwt_middleware_1.JwtMiddleware.verify, category_controller_1.CategoryController.update);
+categoryRoute.delete('/category/:id', jwt_middleware_1.JwtMiddleware.verify, category_controller_1.CategoryController.delete);
+exports.default = categoryRoute;

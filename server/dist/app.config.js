@@ -1,0 +1,23 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.config = void 0;
+exports.config = {
+    port: 4201,
+    jwtSecretKey: '25a6d0ecae2474b6f7872480d2d1aee6',
+    // database: {
+    //   username: 'postgres', // process.env.PGUSER,
+    //   password: 'A1a$', // process.env.PGPASSWORD,
+    //   database: 'pos', // process.env.PGDATABASE,
+    //   port: 5432,
+    //   host: 'localhost', // process.env.PGHOST,
+    // }
+    database: {
+        username: process.env.PGUSER,
+        password: process.env.PGPASSWORD,
+        database: process.env.PGDATABASE,
+        port: 5432,
+        host: process.env.PGHOST,
+        // "typeorm-extension": "^2.0.1",
+        // "typeorm": "^0.3.6"
+    }
+};

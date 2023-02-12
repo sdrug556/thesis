@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const supplier_controller_1 = require("../controllers/supplier.controller");
+const jwt_middleware_1 = require("../middleware/jwt.middleware");
+const supplierRoute = (0, express_1.Router)();
+supplierRoute.get('/supplier', jwt_middleware_1.JwtMiddleware.verify, supplier_controller_1.SupplierController.getAll);
+supplierRoute.post('/supplier', jwt_middleware_1.JwtMiddleware.verify, supplier_controller_1.SupplierController.create);
+supplierRoute.put('/supplier/:id', jwt_middleware_1.JwtMiddleware.verify, supplier_controller_1.SupplierController.update);
+supplierRoute.delete('/supplier/:id', jwt_middleware_1.JwtMiddleware.verify, supplier_controller_1.SupplierController.delete);
+exports.default = supplierRoute;

@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  server:
+    container_name: server
+    working_dir: /server
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    depends_on:
+      - postgres
+    command: node dist/index.js
+    ports:
+      - "4201:4201"
+    environment:
+      - PGUSER=postgres
+      - PGPASSWORD=admin
+      - POSTGRES_PASSWORD=admin
+      - PGDATABASE=pos
+      - PGHOST=postgres
+  client:
+    container_name: client
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    ports:
+      - "4202:81"
+    links:
+    - server
+  postgres:
+    container_name: postgres
+    image: postgres:12.14
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./postgresdata:/var/lib/postgresql/data
+    restart: always
+    environment:
+      - PGUSER=postgres
+      - PGPASSWORD=admin
+      - POSTGRES_PASSWORD=admin
+      - PGHOST=postgres
+      - PGDATABASE=pos

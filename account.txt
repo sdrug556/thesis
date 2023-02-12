@@ -1,0 +1,14 @@
+Gmail/Fly.io:
+  email: sdrug556@gmail.com
+  password: thesis#1234
+
+Github:
+  username: sdrug556t
+  email: sdrug556@gmail.com
+  password: thesis#1234
+
+Netify:
+  email: sdrug556@gmail.com
+  password: sgrud556#thesis
+
+github: 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
