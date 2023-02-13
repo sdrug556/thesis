@@ -19,8 +19,6 @@ exports.AppDataSource = new typeorm_1.DataSource({
     username: app_config_1.config.database.username,
     password: app_config_1.config.database.password,
     database: app_config_1.config.database.database,
-    synchronize: true,
-    logging: false,
     entities: [
         User_1.User,
         Category_1.Category,
@@ -31,6 +29,6 @@ exports.AppDataSource = new typeorm_1.DataSource({
         History_1.History,
         Sales_1.Sales,
     ],
-    migrations: ['./migration/1676078473069-initial.ts'],
+    migrations: [],
     subscribers: [],
 });

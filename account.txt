@@ -12,3 +12,21 @@ Netify:
   password: sgrud556#thesis
 
 github: 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
+
+docker tag ae5da82730b1 cloud.canister.io:5000/username/my-repo:latest
+
+docker push cloud.canister.io:5000/username/my-repo
+
+For the deploy I had to do something similar. First, log in to canister.io in the production server:
+
+Login:
+docker login --username=username cloud.canister.io:5000
+
+Pull the image:
+docker pull cloud.canister.io:5000/username/my-repo:latest
+
+And finally start it:
+docker run -d --restart=on-failure --name my-service-container cloud.canister.io:5000/username/my-repo:latest
+
+
+

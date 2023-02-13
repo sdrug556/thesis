@@ -44,23 +44,34 @@ function addAdminUser() {
     });
 }
 (() => __awaiter(void 0, void 0, void 0, function* () {
-    (0, typeorm_extension_1.createPostgresDatabase)({
-        ifNotExist: true,
-        options: Object.assign(Object.assign({}, app_config_1.config.database), { type: 'postgres' }),
-    })
-        .then(() => {
-        console.log('database successfully initialized!');
+    const initializeDatabase = () => {
         data_source_1.AppDataSource.initialize()
             .then(() => __awaiter(void 0, void 0, void 0, function* () {
-            console.log('successfully initialize database connection');
-            yield addAdminUser();
+            console.log('my successfully initialize database connection');
+            // await addAdminUser();
             app_1.default.listen(app_config_1.config.port, () => {
                 console.log(`server is running on port ${app_config_1.config.port}`);
             });
         }))
             .catch((error) => console.log('my error: ', error));
+    };
+    // const result = await checkDatabase({
+    //   dataSource: AppDataSource,
+    // })
+    // console.log('my result: ', result);
+    // if (result.exists) {
+    //   return initializeDatabase();
+    // }
+    (0, typeorm_extension_1.createPostgresDatabase)({
+        ifNotExist: true,
+        initialDatabase: 'postgres',
+        options: Object.assign(Object.assign({}, app_config_1.config.database), { type: 'postgres' }),
+    })
+        .then(() => {
+        console.log('my database successfully initialized!');
+        initializeDatabase();
     })
         .catch((err) => {
-        console.log('create database error: ', err);
+        console.log('my create database error: ', err);
     });
 }))();

@@ -14,8 +14,6 @@ export const config = {
     database: process.env.PGDATABASE,
     port: 5432,
     host: process.env.PGHOST,
-    // "typeorm-extension": "^2.0.1",
-    // "typeorm": "^0.3.6"
   }
 };
 

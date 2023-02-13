@@ -1,4 +1,4 @@
-import { createDatabase } from 'typeorm-extension';
+import { createPostgresDatabase, checkDatabase } from 'typeorm-extension';
 import app from './app';
 import { config } from './app.config';
 import { AppDataSource } from './data-source';
@@ -30,28 +30,39 @@ async function addAdminUser(): Promise<void> {
 }
 
 (async () => {
-  createDatabase({
-    ifNotExist: true,
-    options: {
-      ...config.database,
-      type: 'postgres',
-    },
-  })
-    .then(() => {
-      console.log('database successfully initialized!');
+  const initializeDatabase = () => {
       AppDataSource.initialize()
         .then(async () => {
-          console.log('successfully initialize database connection');
+          console.log('my successfully initialize database connection');
 
-          await addAdminUser();
+          // await addAdminUser();
 
           app.listen(config.port, () => {
             console.log(`server is running on port ${config.port}`);
           });
         })
         .catch((error) => console.log('my error: ', error));
+  }
+  // const result = await checkDatabase({
+  //   dataSource: AppDataSource,
+  // })
+  // console.log('my result: ', result);
+  // if (result.exists) {
+  //   return initializeDatabase();
+  // }
+  createPostgresDatabase({
+    ifNotExist: true,
+    initialDatabase: 'postgres',
+    options: {
+      ...config.database,
+      type: 'postgres',
+    },
+  })
+    .then(() => {
+      console.log('my database successfully initialized!');
+      initializeDatabase();
     })
     .catch((err) => {
-      console.log('create database error: ', err);
+      console.log('my create database error: ', err);
     });
 })();

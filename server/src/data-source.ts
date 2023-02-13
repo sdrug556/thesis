@@ -17,8 +17,6 @@ export const AppDataSource = new DataSource({
   username: config.database.username,
   password: config.database.password,
   database: config.database.database,
-  synchronize: true,
-  logging: false,
   entities: [
     User,
     Category,
@@ -29,6 +27,6 @@ export const AppDataSource = new DataSource({
     History,
     Sales,
   ],
-  migrations: ['./migration/1676078473069-initial.ts'],
+  migrations: [],
   subscribers: [],
 });

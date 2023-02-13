@@ -15,9 +15,9 @@ services:
     environment:
       - PGUSER=postgres
       - PGPASSWORD=admin
-      - POSTGRES_PASSWORD=admin
       - PGDATABASE=pos
       - PGHOST=postgres
+      - POSTGRES_HOST=postgres
   client:
     container_name: client
     build:
@@ -29,15 +29,18 @@ services:
     - server
   postgres:
     container_name: postgres
-    image: postgres:12.14
+    hostname: postgres
+    image: postgres:15-alpine
     ports:
-      - "5434:5432"
+      - "5433:5432"
     volumes:
       - ./postgresdata:/var/lib/postgresql/data
     restart: always
     environment:
       - PGUSER=postgres
       - PGPASSWORD=admin
-      - POSTGRES_PASSWORD=admin
       - PGHOST=postgres
       - PGDATABASE=pos
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_HOST=postgres
+      - PGDATA=/var/lib/postgresql/data
